@@ -1,0 +1,22 @@
+body {
+    background-color: #F1F2F6;
+}
+
+form {
+    margin-top: 2em;
+    text-align: right;
+}
+
+.timeslot {
+    padding: 1em;
+    margin: 1em 0;
+    background-color: white;
+}
+
+.timeslot h2 {
+    margin: 0;
+}
+
+.timeslot .players {
+    font-size: x-large;
+}
