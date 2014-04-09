@@ -28,12 +28,7 @@ function draw_timeslots(timeslots)
         el.attr('data-id', timeslot.id);
 
         // Title of the timeslot
-        var start_time  = new Date(timeslot.start * 1000);
-        console.log(start_time);
-        var start_format = start_time.getHours() + ":" + start_time.getMinutes();
-        var end_time = new Date(timeslot.end * 1000);
-        var end_format = end_time.getHours() + ":" + end_time.getMinutes();
-        var title = $('<h2>').html(timeslot.game + " (" + start_format + " - " + end_format +  ")");
+        var title = $('<h2>').html(timeslot.game + " (" + formatDate(timeslot.start) + " - " + formatDate(timeslot.end) +  ")");
         title.appendTo(el);
 
         // Players
@@ -44,4 +39,16 @@ function draw_timeslots(timeslots)
         // Show timeslot
         el.appendTo(container);
     });
+}
+
+function formatDate(string)
+{
+    var date = new Date(string * 1000);
+    var hours  = date.getHours();
+    var minutes = date.getMinutes();
+
+    if (hours < 10) { hours = "0" + hours; }
+    if (minutes < 10) { minutes = "0" + minutes; }
+
+    return hours + ":" + minutes;
 }
