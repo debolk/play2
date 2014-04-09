@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <h1>Play</h1>
+                    <h1>Play!</h1>
                 </div>    
                 <div class="col-md-4">
                     <form action="" class="form-inline">
