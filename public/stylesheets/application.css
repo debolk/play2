@@ -8,9 +8,14 @@ form {
 }
 
 .timeslot {
+    cursor: pointer;
     padding: 1em;
     margin: 1em 0;
     background-color: white;
+}
+.timeslot.selected {
+    color: #3C763D;
+    background-color: #B9DF90;
 }
 
 .timeslot h2 {

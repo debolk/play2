@@ -9,10 +9,26 @@ class InterfaceController extends BaseController
 
     public function timeslots()
     {
-        $data = [
-            ['id' => 1, 'game' => 'COD2', 'start' => time(), 'end' => strtotime('+2 hours'), 'users' => ['Jakob', 'Max']],
-            ['id' => 2, 'game' => 'CIV5', 'start' => strtotime('-1 hour'), 'end' => strtotime('+1 hour'), 'users' => ['Jakob', 'Anne', 'Yvonne']],
-        ];
-        return Response::json($data);
+        $timeslots = Timeslot::current();
+
+        //FIXME cache using memcache
+        return Response::json($timeslots);
+    }
+
+    public function choose()
+    {
+        if (!Input::has('name')) {
+            App::abort(400, "Must enter a name");
+        }
+
+        $timeslot = Timeslot::find(Input::get('timeslot'));
+        if (!$timeslot) {
+            App::abort(404, 'Timeslot does not exist');
+        }
+
+        // Set the timeslot
+        $timeslot->set(Input::get('name'));
+
+        return $this->timeslots();
     }
 }

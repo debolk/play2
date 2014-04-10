@@ -19,8 +19,11 @@
                     <form action="" class="form-inline">
                         <label>
                             Your username:
-                            <input type="text" name="name" placeholder="Your name" class="form-control" />
+                            <input type="text" name="name" id="name" placeholder="Your name" class="form-control" />
                         </label>
+                        <div class="alert alert-danger" id="name-error">
+                            You must enter a username. 
+                        </div>
                     </form>
                 </div>
             </div>
