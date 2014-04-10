@@ -70,6 +70,11 @@ function formatDate(string)
 
 function select_timeslot(event)
 {
+    // Do nothing if this timeslot is already selected
+    if ($(this).hasClass('selected')) {
+        return;
+    }
+
     // Update interface
     event.preventDefault();
     $('.timeslot').each(function(key, timeslot){
