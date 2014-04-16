@@ -20,7 +20,7 @@ class InterfaceController extends BaseController
 
         if (! $timeslots) {
             $timeslots = Response::json(Timeslot::current());
-            $this->memcache->set('timeslots', $timeslots);
+            $this->memcache->set('timeslots', $timeslots, 180);
         }
 
         return $timeslots;
@@ -44,7 +44,7 @@ class InterfaceController extends BaseController
 
         // Update memcache and return the updated set
         $new_timeslots = Response::json(Timeslot::current());
-        $this->memcache->set('timeslots', $new_timeslots);
+        $this->memcache->set('timeslots', $new_timeslots, 180);
 
         // Return updated set of timeslots
         return $new_timeslots;
