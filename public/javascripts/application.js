@@ -14,13 +14,12 @@ $(document).ready(function(){
 
 function load_timeslots()
 {
-    console.log('Reloading timeslots');
     $.ajax({
         url: '/timeslots',
         method: 'GET',
         success: function(results) {
             draw_timeslots(results);
-
+            setTimeout(load_timeslots, 5*1000);
         },
         dataType: 'json',
     });
