@@ -45,9 +45,14 @@ function draw_timeslots(timeslots)
         var title = $('<h2>').html(timeslot.game + " (" + formatDate(timeslot.start) + " - " + formatDate(timeslot.end) +  ")");
         title.appendTo(el);
 
-        // Players
-        var text = timeslot.users.length + " players: " + timeslot.users.join(', ');
-        var players = $('<div>').addClass('players').html(text);
+        // Number and names of players
+        var players = $('<div>').addClass('players');
+        if (typeof timeslot.users == 'undefined' || timeslot.users.length === 0) {
+            players.text('No players');
+        }
+        else {
+            players.text(timeslot.users.length + " players: " + timeslot.users.join(', '));
+        }
         players.appendTo(el);
 
         // Show timeslot
@@ -69,6 +74,14 @@ function formatDate(string)
 
 function select_timeslot(event)
 {
+    event.preventDefault();
+
+    // Show an alert if the player has to set a gamername first
+    if ($('#name').val().trim().length === 0) {
+        alert('Please set your name first in the top-right corner');
+        return false;
+    }
+
     // Do nothing if this timeslot is already selected
     if ($(this).hasClass('selected')) {
         return;
