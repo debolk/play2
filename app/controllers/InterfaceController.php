@@ -49,4 +49,28 @@ class InterfaceController extends BaseController
         // Return updated set of timeslots
         return $new_timeslots;
     }
+
+    public function unchoose()
+    {
+        // Very basic validation
+        if (!Input::has('name')) {
+            App::abort(400, "Must enter a name");
+        }
+
+        // Find the current timeslot
+        $timeslot = Timeslot::find(Input::get('timeslot'));
+        if (!$timeslot) {
+            App::abort(404, 'Timeslot does not exist');
+        }
+
+        // // Add the name to the timeslot
+        $timeslot->remove(Input::get('name'));
+
+        // // Update memcache and return the updated set
+        $new_timeslots = Response::json(Timeslot::current());
+        $this->memcache->set('timeslots', $new_timeslots, 180);
+
+        // // Return updated set of timeslots
+        return $new_timeslots;
+    }
 }

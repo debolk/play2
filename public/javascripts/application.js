@@ -1,11 +1,11 @@
-var selected_timeslot = null;
+var selected_timeslots = [];
 
 $(document).ready(function(){
     // Load the timeslots
     load_timeslots();
 
     // Selecting timeslots
-    $('#timeslots').on('click', '.timeslot', select_timeslot);
+    $('#timeslots').on('click', '.timeslot', click_timeslot);
 
     // Must type acceptable gamer name
     $('#name').on('keyup', validate_name);
@@ -37,7 +37,7 @@ function draw_timeslots(timeslots)
         el.attr('data-id', timeslot._id);
 
         // Select if needed
-        if (selected_timeslot == timeslot._id) {
+        if ($.inArray(timeslot._id, selected_timeslots) !== -1) {
             el.addClass('selected');
         }
 
@@ -72,7 +72,7 @@ function formatDate(string)
     return hours + ":" + minutes;
 }
 
-function select_timeslot(event)
+function click_timeslot(event)
 {
     event.preventDefault();
 
@@ -82,34 +82,13 @@ function select_timeslot(event)
         return false;
     }
 
-    // Do nothing if this timeslot is already selected
+    // Toggle select of deselect actions
     if ($(this).hasClass('selected')) {
-        return;
+        deselect_timeslot.call(this);
     }
-
-    // Update interface
-    event.preventDefault();
-    $('.timeslot').each(function(key, timeslot){
-        $(timeslot).removeClass('selected');
-    });
-    $(this).addClass('selected');
-
-    // Store state
-    selected_timeslot = $(this).attr('data-id');
-
-    // Save on server
-    $.ajax({
-        url: '/choose',
-        method: 'POST',
-        data: JSON.stringify({
-            name: $('#name').val(),
-            timeslot: $(this).attr('data-id'),
-        }),
-        contentType:"application/json; charset=utf-8",
-        dataType: 'json',
-        success: draw_timeslots,
-        error: reset_interface
-    });
+    else {
+        select_timeslot.call(this);
+    }
 }
 
 function reset_interface()
@@ -121,4 +100,57 @@ function reset_interface()
 function validate_name()
 {
     $('#name-error').toggle($(this).val().trim().length === 0);
+}
+
+function select_timeslot()
+{
+    // Update interface
+    $(this).addClass('selected');
+
+    // Store state
+    var id = $(this).attr('data-id');
+    if ($.inArray(id, selected_timeslots) == -1) {
+        selected_timeslots.push(id);
+    }
+
+    // Save on server
+    $.ajax({
+        url: '/choose',
+        method: 'POST',
+        data: JSON.stringify({
+            name: $('#name').val(),
+            timeslot: id,
+        }),
+        contentType:"application/json; charset=utf-8",
+        dataType: 'json',
+        success: draw_timeslots,
+        error: reset_interface
+    });
+}
+
+function deselect_timeslot()
+{
+    // Update interface
+    $(this).removeClass('selected');
+
+    // Remove this timeslot from state
+    var id = $(this).attr('data-id');
+    var index = selected_timeslots.indexOf(id);
+    if (index > -1) {
+        selected_timeslots.splice(index, 1);
+    }
+
+    // Save on server
+    $.ajax({
+        url: '/unchoose',
+        method: 'POST',
+        data: JSON.stringify({
+            name: $('#name').val(),
+            timeslot: id,
+        }),
+        contentType:"application/json; charset=utf-8",
+        dataType: 'json',
+        success: draw_timeslots,
+        error: reset_interface
+    });
 }

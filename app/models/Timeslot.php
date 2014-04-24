@@ -10,12 +10,25 @@ class Timeslot extends Jenssegers\Mongodb\Model
         return $this->all();
     }
 
+    /**
+     * Add a new name to this timeslot, if it isn't set already
+     * @param string $name the name to add to the player list
+     * @return void
+     */
     public function set($name)
     {
-        // Remove name from all timeslots
-        DB::collection('timeslots')->pull('users', $name);
+        if (! in_array($name, $this->users)) {
+            DB::collection('timeslots')->where('_id', $this->_id)->push('users', $name);
+        }
+    }
 
-        // Add this name to the timeslot
-        DB::collection('timeslots')->where('_id', $this->_id)->push('users', $name);
+    /**
+     * Remove a name from the timeslot
+     * @param string $name the name to yank
+     * @return void
+     */
+    public function remove($name) 
+    {
+        DB::collection('timeslots')->where('_id', $this->_id)->pull('users', $name);
     }
 }
