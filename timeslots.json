@@ -1,0 +1,72 @@
+{ 
+    "game" : "Call Of Duty 2", 
+    "start" : ISODate("2014-04-25T23:00:00Z"), 
+    "end" : ISODate("2014-04-26T01:00:00Z"), 
+    "users" : []
+}
+{ 
+    "game" : "Civilization 5", 
+    "start" : ISODate("2014-04-26T01:00:00Z"), 
+    "end" : ISODate("2014-04-26T09:00:00Z"), 
+    "users" : []
+}
+{ 
+    "game" : "Trackmania", 
+    "start" : ISODate("2014-04-26T11:00:00Z"), 
+    "end" : ISODate("2014-04-26T13:00:00Z"), 
+    "users" : []
+}
+{ 
+    "game" : "Mario Kart", 
+    "start" : ISODate("2014-04-26T13:00:00Z"), 
+    "end" : ISODate("2014-04-26T14:00:00Z"), 
+    "users" : []
+}
+{ 
+    "game" : "Terraria", 
+    "start" : ISODate("2014-04-26T15:00:00Z"), 
+    "end" : ISODate("2014-04-26T18:30:00Z"), 
+    "users" : []
+}
+{ 
+    "game" : "Worms", 
+    "start" : ISODate("2014-04-26T20:00:00Z"), 
+    "end" : ISODate("2014-04-26T23:00:00Z"), 
+    "users" : []
+}
+{ 
+    "game" : "Call Of Duty 2", 
+    "start" : ISODate("2014-04-26T23:00:00Z"), 
+    "end" : ISODate("2014-04-27T01:00:00Z"), 
+    "users" : []
+}
+{ 
+    "game" : "Left For Dead", 
+    "start" : ISODate("2014-04-27T01:00:00Z"), 
+    "end" : ISODate("2014-04-27T05:00:00Z"), 
+    "users" : []
+}
+{ 
+    "game" : "Super Smash Melee", 
+    "start" : ISODate("2014-04-27T13:00:00Z"), 
+    "end" : ISODate("2014-04-27T15:00:00Z"), 
+    "users" : []
+}
+{ 
+    "game" : "Crusader Kings", 
+    "start" : ISODate("2014-04-27T15:00:00Z"), 
+    "end" : ISODate("2014-04-27T18:30:00Z"), 
+    "users" : []
+}
+{ 
+    "game" : "Prophunt", 
+    "start" : ISODate("2014-04-27T20:00:00Z"), 
+    "end" : ISODate("2014-04-27T22:00:00Z"), 
+    "users" : []
+}
+{ 
+    "game" : "Call Of Duty", 
+    "start" : ISODate("2014-04-27T22:00:00Z"), 
+    "end" : ISODate("2014-04-27T23:59:00Z"), 
+    "users" : []
+}
