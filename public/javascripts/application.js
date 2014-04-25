@@ -63,7 +63,7 @@ function draw_timeslots(timeslots)
 function formatDate(date)
 {
     // Return only the HH:MM part of date
-    return date.substring(date.length-5, date.length);
+    return date.substring(date.length-8, date.length-3);
 }
 
 function click_timeslot(event)

@@ -3,11 +3,14 @@
 class Timeslot extends Jenssegers\Mongodb\Model
 {
     protected $fillable = ['game', 'start', 'end', 'users'];
+    protected $dates = ['start', 'end'];
 
-    public function scopeCurrent()
+    /**
+     * Return all timeslots which have their starting point in the next two hours or are ongoing
+     */
+    public function scopeCurrent($query)
     {
-        //FIXME return upcoming timeslots only (all timeslots which have their starting point in this hour or the next)
-        return $this->all();
+        return $query->where('start', '<=', new DateTime('+6 hours'))->where('end', '>', new DateTime('+2 hours'))->get();
     }
 
     /**
