@@ -60,16 +60,10 @@ function draw_timeslots(timeslots)
     });
 }
 
-function formatDate(string)
+function formatDate(date)
 {
-    var date = new Date(string * 1000);
-    var hours  = date.getHours();
-    var minutes = date.getMinutes();
-
-    if (hours < 10) { hours = "0" + hours; }
-    if (minutes < 10) { minutes = "0" + minutes; }
-
-    return hours + ":" + minutes;
+    // Return only the HH:MM part of date
+    return date.substring(date.length-5, date.length);
 }
 
 function click_timeslot(event)
